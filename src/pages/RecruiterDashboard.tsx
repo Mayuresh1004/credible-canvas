@@ -97,6 +97,27 @@ const RecruiterDashboard = () => {
       return;
     }
     fetchCertificates();
+
+    // Subscribe to realtime updates for certificates
+    const channel = supabase
+      .channel("certificates-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "certificates",
+        },
+        (payload) => {
+          console.log("Certificate change detected:", payload);
+          fetchCertificates();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user, userRole, navigate]);
 
   const fetchCertificates = async () => {
