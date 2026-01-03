@@ -14,7 +14,7 @@ const Footer = () => {
               <span className="font-display font-bold text-xl">CertVerify</span>
             </Link>
             <p className="text-primary-foreground/70 max-w-sm">
-              Jharkhand's trusted platform for academic certificate verification. 
+              Your trusted platform for academic certificate verification. 
               Protecting institutional integrity through blockchain technology.
             </p>
           </div>
@@ -32,14 +32,13 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-primary-foreground/70">
               <li>Higher Education Department</li>
-              <li>Government of Jharkhand</li>
-              <li>support@certverify.jh.gov.in</li>
+              <li>support@certverify.com</li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-primary-foreground/10 pt-8 text-center text-primary-foreground/50 text-sm">
-          <p>© 2024 CertVerify. All rights reserved. Government of Jharkhand Initiative.</p>
+          <p>© 2024 CertVerify. All rights reserved.</p>
         </div>
       </div>
     </footer>

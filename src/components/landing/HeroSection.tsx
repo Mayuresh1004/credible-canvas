@@ -19,7 +19,7 @@ const HeroSection = () => {
           <div className="text-center lg:text-left animate-fade-in">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white/80 text-sm mb-6">
               <Shield className="h-4 w-4 text-accent" />
-              <span>Trusted by 50+ Institutions in Jharkhand</span>
+              <span>Trusted by 50+ Institutions Worldwide</span>
             </div>
 
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">

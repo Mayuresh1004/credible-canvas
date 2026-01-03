@@ -21,7 +21,7 @@ const features = [
   {
     icon: Database,
     title: "Centralized Registry",
-    description: "Access a unified database of verified certificates from institutions across Jharkhand.",
+    description: "Access a unified database of verified certificates from institutions worldwide.",
   },
   {
     icon: AlertTriangle,
