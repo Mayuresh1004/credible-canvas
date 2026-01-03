@@ -101,27 +101,41 @@ const RecruiterDashboard = () => {
 
   const fetchCertificates = async () => {
     try {
-      const { data, error } = await supabase
+      // Fetch certificates with institutions
+      const { data: certificatesData, error: certError } = await supabase
         .from("certificates")
-        .select(`
-          *,
-          institutions (name),
-          profiles!certificates_user_id_fkey (full_name, email)
-        `)
+        .select(`*, institutions (name)`)
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
+      if (certError) throw certError;
+
+      // Get unique user IDs and fetch their profiles
+      const userIds = [...new Set((certificatesData || []).map((c) => c.user_id))];
+      
+      const { data: profilesData, error: profilesError } = await supabase
+        .from("profiles")
+        .select("id, full_name, email")
+        .in("id", userIds);
+
+      if (profilesError) throw profilesError;
+
+      // Create a map of profiles by user ID
+      const profilesMap = new Map(
+        (profilesData || []).map((p) => [p.id, p])
+      );
 
       // Group certificates by student
       const studentMap = new Map<string, StudentWithCertificates>();
       
-      (data || []).forEach((cert: any) => {
+      (certificatesData || []).forEach((cert: any) => {
         const userId = cert.user_id;
+        const profile = profilesMap.get(userId);
+        
         if (!studentMap.has(userId)) {
           studentMap.set(userId, {
             id: userId,
-            full_name: cert.profiles?.full_name || "Unknown",
-            email: cert.profiles?.email || "",
+            full_name: profile?.full_name || "Unknown",
+            email: profile?.email || "",
             certificates: [],
           });
         }
